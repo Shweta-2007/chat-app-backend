@@ -27,6 +27,16 @@ app.get("/ping", (_req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
+app.get("/api/avatar/:seed", async (req, res) => {
+  try {
+    const { seed } = req.params;
+    const response = await axios.get(`https://api.multiavatar.com/${seed}`);
+    res.send(response.data);
+  } catch (error) {
+    res.status(500).send("Error fetching avatar");
+  }
+});
+
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
