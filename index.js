@@ -30,9 +30,13 @@ app.use("/api/messages", messageRoutes);
 app.get("/api/avatar/:seed", async (req, res) => {
   try {
     const { seed } = req.params;
-    const response = await axios.get(`https://api.multiavatar.com/${seed}`);
+    const response = await axios.get(`https://api.multiavatar.com/${seed}`, {
+      headers: { Accept: "image/svg+xml" }, // Ensure correct format
+    });
+    res.setHeader("Content-Type", "image/svg+xml"); // Set correct response type
     res.send(response.data);
   } catch (error) {
+    console.error("Error fetching avatar:", error.message); // Log error for debugging
     res.status(500).send("Error fetching avatar");
   }
 });
