@@ -33,7 +33,7 @@ const server = app.listen(process.env.PORT, () =>
 const io = socket(server, {
   cors: {
     // origin: "http://localhost:3000",
-    origin: "https://connectly-connectly.netlify.app",
+    origin: "https://connectly-chat-now.netlify.app",
     credentials: true,
   },
 });
